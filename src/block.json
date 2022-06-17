@@ -1,0 +1,16 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 2,
+	"name": "create-block/gblock-latest-posts",
+	"version": "0.1.0",
+	"title": "Gblock Latest Posts",
+	"category": "text",
+	"description": "Gutenberg Block to show latest posts.",
+	"supports": {
+		"html": false
+	},
+	"textdomain": "gblock-latest-posts",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css"
+}

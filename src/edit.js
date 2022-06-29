@@ -1,41 +1,134 @@
-/**
- * Retrieves the translation of text.
- *
- * @see https://developer.wordpress.org/block-editor/packages/packages-i18n/
- */
 import { __ } from '@wordpress/i18n';
-
-/**
- * React hook that is used to mark the block wrapper element.
- * It provides all the necessary props like the class name.
- *
- * @see https://developer.wordpress.org/block-editor/packages/packages-block-editor/#useBlockProps
- */
-import { useBlockProps } from '@wordpress/block-editor';
-
-/**
- * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
- * Those files can contain any CSS code that gets applied to the editor.
- *
- * @see https://www.npmjs.com/package/@wordpress/scripts#using-css
- */
+import { RawHTML } from '@wordpress/element';
+// eslint-disable-next-line @wordpress/no-unsafe-wp-apis
+import { format, dateI18n, __experimentalGetSettings } from '@wordpress/date';
+import { useBlockProps, InspectorControls } from '@wordpress/block-editor';
+import { PanelBody, ToggleControl, QueryControls } from '@wordpress/components';
+import { select, useSelect } from '@wordpress/data';
 import './editor.scss';
 
-/**
- * The edit function describes the structure of your block in the context of the
- * editor. This represents what the editor will render when the block is used.
- *
- * @see https://developer.wordpress.org/block-editor/developers/block-api/block-edit-save/#edit
- *
- * @return {WPElement} Element to render.
- */
-export default function Edit() {
+export default function Edit({ attributes, setAttributes }) {
+	const { numberOfPosts, displayFeaturedImage, order, orderBy, categories } = attributes;
+
+	const catIDs = 
+		categories && categories.length > 0 
+			? categories.map((cat) => cat.id) 
+			: [];
+
+	const posts = useSelect(
+		(select) => {
+			return select('core').getEntityRecords('postType', 'post', {
+				per_page: numberOfPosts,
+				_embed: true,
+				order,
+				orderby: orderBy,
+				categories: catIDs
+			});
+		},
+		[numberOfPosts, order, orderBy, categories]
+	);
+
+	const allCats = useSelect((select) => {
+		return select('core').getEntityRecords('taxonomy', 'category', {
+			per_page: -1,
+		});
+	}, []);
+
+	const catSuggestions = {};
+	if(allCats){
+		for (let i = 0; i < allCats.length; i++) {
+			const cat = allCats[i];
+			catSuggestions[cat.name] = cat
+			
+		};
+	};
+
+	const onDisplayFeatureImageChange = (value) => {
+		setAttributes({displayFeaturedImage: value });
+	};
+	const onNumberOfItemsChange = (value) => {
+		setAttributes({numberOfPosts: value });
+	};
+
+	const onCategoryChange = (values) => {
+		const hasNoSuggestions = values.some(
+			(value) => typeof value === 'string' && !catSuggestions[value]
+		);
+		if (hasNoSuggestions) return;
+
+		const updatedCats = values.map((token) => {
+			return typeof token === 'string' ? catSuggestions[token] : token;
+		});
+
+		setAttributes({ categories: updatedCats });
+	};
+
 	return (
-		<p { ...useBlockProps() }>
-			{ __(
-				'Gblock Latest Posts – hello from the editor!',
-				'gblock-latest-posts'
-			) }
-		</p>
+		<>
+		<InspectorControls>
+			<PanelBody>
+				<ToggleControl 
+				label={__('Display Feature Image', 'latest-posts')} 
+				checked={displayFeaturedImage}
+				onChange={onDisplayFeatureImageChange}
+				/>
+				<QueryControls 
+				numberOfItems={numberOfPosts} onNumberOfItemsChange={onNumberOfItemsChange} 
+				maxItems={10}
+				minItems={1}
+				orderBy={orderBy}
+				onOrderByChange={(value) => setAttributes({orderBy:value})}
+				order={order}
+				onOrderChange={(value) => setAttributes({order:value})}
+				categorySuggestions={catSuggestions}
+				selectedCategories={categories}
+				onCategoryChange={onCategoryChange}
+				/>
+			</PanelBody>
+		</InspectorControls>
+		<ul {...useBlockProps()}>
+			{posts &&
+				posts.map((post) => {
+					const featuredImage =
+						post._embedded &&
+						post._embedded['wp:featuredmedia'] &&
+						post._embedded['wp:featuredmedia'].length > 0 &&
+						post._embedded['wp:featuredmedia'][0];
+					return (
+						<li key={post.id}>
+							{displayFeaturedImage && featuredImage && (
+								<img
+									src={
+										featuredImage.media_details.sizes.large.source_url
+									}
+									alt={featuredImage.alt_text}
+								/>
+							)}
+							<h5>
+								<a href={post.link}>
+									{post.title.rendered ? (
+										<RawHTML>{post.title.rendered}</RawHTML>
+									) : (
+										__('(No title)', 'latest-posts')
+									)}
+								</a>
+							</h5>
+							{post.date_gmt && (
+								<time dateTime={format('c', post.date_gmt)}>
+									{dateI18n(
+										__experimentalGetSettings().formats
+											.date,
+										post.date_gmt
+									)}
+								</time>
+							)}
+							{post.excerpt.rendered && (
+								<RawHTML>{post.excerpt.rendered}</RawHTML>
+							)}
+						</li>
+					);
+				})}
+		</ul>
+		</>
 	);
 }

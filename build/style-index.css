@@ -1,16 +1,1 @@
-/*!***************************************************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/style.scss ***!
-  \***************************************************************************************************************************************************************************************************************************************/
-/**
- * The following styles get applied both on the front of your site
- * and in the editor.
- *
- * Replace them with your own styles or remove the file completely.
- */
-.wp-block-create-block-gblock-latest-posts {
-  background-color: #21759b;
-  color: #fff;
-  padding: 2px;
-}
-
-/*# sourceMappingURL=style-index.css.map*/
+ul.wp-block-block-gblock-latest-posts{-ms-grid-columns:(1fr)[3];display:-ms-grid;display:grid;gap:30px;grid-template-columns:repeat(3,1fr);list-style:none;margin:0;padding:0}ul.wp-block-block-gblock-latest-posts li img{margin-bottom:10px}ul.wp-block-block-gblock-latest-posts li h5{font-size:20px;line-height:1.4;margin:0 0 5px}ul.wp-block-block-gblock-latest-posts li h5 a{color:#000}ul.wp-block-block-gblock-latest-posts li time{color:#969696;font-size:12px}ul.wp-block-block-gblock-latest-posts li p{color:#303030;font-size:14px;line-height:1.6;margin:15px 0 0}

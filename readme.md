@@ -1,55 +1,33 @@
-=== Gblock Latest Posts ===
-Contributors:      The WordPress Contributors
-Tags:              block
-Tested up to:      6.0
-Stable tag:        0.1.0
-License:           GPL-2.0-or-later
-License URI:       https://www.gnu.org/licenses/gpl-2.0.html
+# Gutenberg Block Latest Posts
 
-Example static block scaffolded with Create Block tool.
+This is a Gutenberg Block built with **Javascript** and **React**, which can be used anywhere in WordPress **post, page, cpt**. It allows adding the latest posts through a Gutenberg block, this can be filtered by **category,** **publication order**,** display the featured image** and **the number of posts to display.**
 
-== Description ==
+![](https://raw.githubusercontent.com/gydoar/Gutenberg-Block-Team-Members/main/screenshots/screenshot.png)
 
-This is the long description. No limit, and you can use Markdown (as well as in the following sections).
+## Table of content
 
-For backwards compatibility, if this section is missing, the full length of the short description will be used, and
-Markdown parsed.
+- [Overview][#Overview]
+- [Requirements][#Requirements]
+- [Instalation][#Instalation]
+- [Screenshots][#Screenshots]
 
-== Installation ==
+#### Requirements
 
-This section describes how to install the plugin and get it working.
+- WordPress 5.9 at least
+- PHP > 7.4
 
-e.g.
+#### Instalation
+- Download the plugin from [Github](https://github.com/gydoar/Gblock-Latest-Post/archive/refs/heads/main.zip "Github") or WordPress repositories.
+- Unzip or add the folder inside the `/wp-content/plugins` directory.
+- Activate the plugin from *Dashboard Admin > Plugins*
+- Start using from posts, pages, widgets or cpt.
 
-1. Upload the plugin files to the `/wp-content/plugins/gblock-latest-posts` directory, or install the plugin through the WordPress plugins screen directly.
-1. Activate the plugin through the 'Plugins' screen in WordPress
+#### Screenshots
+
+![](https://raw.githubusercontent.com/gydoar/Gutenberg-Block-Team-Members/main/screenshots/screenshot3.png)
 
 
-== Frequently Asked Questions ==
-
-= A question that someone might have =
-
-An answer to that question.
-
-= What about foo bar? =
-
-Answer to foo bar dilemma.
-
-== Screenshots ==
-
-1. This screen shot description corresponds to screenshot-1.(png|jpg|jpeg|gif). Note that the screenshot is taken from
-the /assets directory or the directory that contains the stable readme.txt (tags or trunk). Screenshots in the /assets
-directory take precedence. For example, `/assets/screenshot-1.png` would win over `/tags/4.3/screenshot-1.png`
-(or jpg, jpeg, gif).
-2. This is the second screen shot
-
-== Changelog ==
-
-= 0.1.0 =
-* Release
-
-== Arbitrary section ==
-
-You may provide arbitrary sections, in the same format as the ones above. This may be of use for extremely complicated
-plugins where more information needs to be conveyed that doesn't fit into the categories of "description" or
-"installation." Arbitrary sections will be shown below the built-in sections outlined above.
+[#Overview]: #Overview
+[#Requirements]: #Requirements "Requirements"
+[#Instalation]: #Instalation "Instalation"
+[#Screenshots]: #Screenshots "Screenshots"

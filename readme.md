@@ -2,7 +2,7 @@
 
 This is a Gutenberg Block built with **Javascript** and **React**, which can be used anywhere in WordPress **post, page, cpt**. It allows adding the latest posts through a Gutenberg block, this can be filtered by **category,** **publication order**,** display the featured image** and **the number of posts to display.**
 
-![](https://raw.githubusercontent.com/gydoar/Gutenberg-Block-Team-Members/main/screenshots/screenshot.png)
+![](https://raw.githubusercontent.com/gydoar/Gblock-Latest-Post/main/screenshot/image1.png)
 
 ## Table of content
 
@@ -24,7 +24,7 @@ This is a Gutenberg Block built with **Javascript** and **React**, which can be 
 
 #### Screenshots
 
-![](https://raw.githubusercontent.com/gydoar/Gutenberg-Block-Team-Members/main/screenshots/screenshot3.png)
+![](https://raw.githubusercontent.com/gydoar/Gblock-Latest-Post/main/screenshot/image1.png)
 
 
 [#Overview]: #Overview
